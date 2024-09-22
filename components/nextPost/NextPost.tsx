@@ -16,14 +16,15 @@ const NextPost = ({ post, position }: any) => {
           {post.title}
         </p>
       </div>
-      <Link href={`/blogs/blog/${post.slug}`}>
+      {/* Adjusted Link to use post.id or another unique identifier */}
+      <Link href={`/blogs/blog/${post.id}`}>
         <span className="z-10 cursor-pointer absolute w-full h-full" />
       </Link>
       {position === "LEFT" && (
         <div className="absolute arrow-btn bottom-5 text-center py-3 cursor-pointer bg-gray-600 left-4 rounded-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6  text-white "
+            className="h-6 text-white"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

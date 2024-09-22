@@ -7,6 +7,8 @@ import BackgroundWave from "../backgroundWave/BackgroundWave";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import NewsLetter from "../newsLetter/NewsLetter";
+import { useEffect, useState } from "react";
+import { fetchMediumPosts } from "@/utils/actions/fetchMediumPosts";
 
 const Footer = () => {
   return (

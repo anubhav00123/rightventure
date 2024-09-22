@@ -6,6 +6,8 @@ import { connectToDatabase } from "../database/mongoConnection";
 import { handleError } from "../cn";
 import { revalidatePath } from "next/cache";
 import path from "path";
+import fetch from "node-fetch";
+import xml2js from "xml2js";
 
 //Create BlogPost
 export async function createBlogPost(formData: FormData) {
@@ -381,3 +383,39 @@ export async function fetchCategoryCount() {
     handleError(error);
   }
 }
+
+// export async function fetchMedium() {
+//   try {
+//     const mediumRSSFeed = "https://medium.com/feed/@anubhavkaushik2020";
+//     const response = await axios.get(mediumRSSFeed);
+
+//     let postsData: any = [];
+//     await xml2js.parseString(response.data, (err: any, result: any) => {
+//       if (err) {
+//         console.error("Error parsing RSS feed:", err);
+//         return;
+//       }
+
+//       const items = result.rss.channel[0].item;
+//       postsData = items.map((item: any) => ({
+//         title: item.title[0],
+//         link: item.link[0],
+//         pubDate: item.pubDate[0],
+//         content: item["content:encoded"][0],
+//       }));
+//     });
+
+//     return {
+//       props: {
+//         posts: postsData,
+//       },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching Medium RSS feed:", error);
+//     return {
+//       props: {
+//         posts: [],
+//       },
+//     };
+//   }
+// }

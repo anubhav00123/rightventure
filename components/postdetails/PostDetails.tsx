@@ -1,17 +1,30 @@
+import moment from "moment";
 import Image from "next/image";
 
 const PostDetails = ({ post }: any) => {
+  const extractImageUrl = (post: any) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(post, "text/html");
+    const imgElement = doc.querySelector("img");
+    return imgElement ? imgElement.src : null;
+  };
+
+  const imageUrl = extractImageUrl(post.content);
   return (
     <div>
       <div className="bg-white shadow-lg rounded-lg lg:p-8 pb-12  mb-8">
         <div className="relative overflow-hidden shadow-md mb-6">
-          <Image
-            src={post.image}
-            width={1920}
-            height={1080}
-            alt={post.title}
-            className="object-top h-full w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
-          />
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              width={600}
+              height={800}
+              alt="Image of the post"
+              className="object-top absolute h-full w-full object-fill shadow-lg rounded-t-lg lg:rounded-lg"
+            />
+          ) : (
+            ""
+          )}
         </div>
         <div className="px-4 lg:px-0">
           <div className="flex items-center justify-between mb-8 w-full">
@@ -36,15 +49,11 @@ const PostDetails = ({ post }: any) => {
                 />
               </svg>
               <span className="align-middle text-black">
-                {new Date(post.createdAt).toLocaleDateString()}
+                {moment(post.pubDate).format("DD/MM/YYYY")}
               </span>
             </div>
             <div className="flex flex-row space-x-8">
               <h2 className="text-black text-3xl font-bold">{post.author}</h2>
-
-              <p className="flex items-center justify-center text-black">
-                {post.views} Views
-              </p>
             </div>
           </div>
           <h1 className="mb-8 text-3xl font-semibold text-black">

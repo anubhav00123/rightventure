@@ -10,6 +10,7 @@ import FiveCard from "@/components/fiveCard/FiveCard";
 import ServiceBanner from "@/components/serviceBanner/ServiceBanner";
 import WorkBanner from "@/components/workBanner/WorkBanner";
 import TawkTo from "@/components/tawkto/TawkTo";
+import { GetServerSideProps } from "next";
 
 export default function Home() {
   useEffect(() => {
